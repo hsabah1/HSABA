@@ -2,149 +2,170 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>حاسبة التاريخ</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: "Tahoma", sans-serif;
-      background: linear-gradient(135deg, #74ABE2, #5563DE);
+      background: linear-gradient(135deg, #8B5E3C, #A67B5B); /* لون بني جذاب */
       color: #fff;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       direction: rtl;
     }
 
     .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .box {
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
-      padding: 30px;
+      padding: 20px;
       border-radius: 20px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-      text-align: center;
-      max-width: 450px;
-      width: 100%;
+      width: 90%;
+      max-width: 400px;
+      margin: 20px 0;
     }
 
     h2 {
       margin-bottom: 20px;
       font-weight: bold;
-      font-size: 24px;
+      font-size: 22px;
     }
 
     h3 {
-      margin-top: 10px;
-      font-size: 20px;
+      margin-top: 15px;
+      font-size: 18px;
     }
 
     label {
       display: block;
-      margin: 15px 0 5px;
+      margin: 12px 0 5px;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 15px;
     }
 
     input, select {
       width: 100%;
       padding: 10px;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       border-radius: 10px;
       border: none;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: bold;
       text-align: center;
     }
 
     button {
-      background: #ffcc00;
+      background: #FFD27F;
       color: #333;
       border: none;
-      padding: 12px 20px;
-      font-size: 16px;
+      padding: 12px;
+      font-size: 15px;
       font-weight: bold;
       border-radius: 12px;
       cursor: pointer;
       transition: 0.3s;
       width: 100%;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     button:hover {
-      background: #ffaa00;
+      background: #FFB347;
     }
 
     .result {
-      margin-top: 15px;
-      font-size: 18px;
+      margin-top: 12px;
+      font-size: 16px;
       font-weight: bold;
       color: #fff;
-      background: rgba(0,0,0,0.3);
-      padding: 12px;
+      background: rgba(0,0,0,0.25);
+      padding: 10px;
       border-radius: 12px;
+      word-wrap: break-word;
     }
 
     hr {
-      margin: 30px 0;
+      margin: 20px 0;
       border: none;
       border-top: 1px solid rgba(255,255,255,0.4);
     }
 
-    /* التوقيع */
     .signature {
-      margin-top: 20px;
       font-size: 14px;
       font-weight: bold;
       color: rgba(255, 255, 255, 0.85);
       text-align: center;
-      font-style: normal; /* إزالة italic */
-      font-family: "Tahoma", sans-serif; /* نفس خط البرنامج */
+      font-style: normal;
+      font-family: "Tahoma", sans-serif;
       letter-spacing: 1px;
+      padding: 10px 0;
+    }
+
+    @media (max-width: 480px) {
+      .box {
+        padding: 15px;
+      }
+      h2 { font-size: 20px; }
+      h3 { font-size: 16px; }
+      input, select, button { font-size: 14px; padding: 10px; }
+      .result { font-size: 15px; padding: 8px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>حاسبة التاريخ</h2>
+    <div class="box">
+      <h2>حاسبة التاريخ</h2>
 
-    <!-- القسم الأول: حساب تاريخ جديد -->
-    <h3>📅 احسب تاريخ جديد</h3>
-    <label>تاريخ البداية:</label>
-    <input type="date" id="startDate">
+      <!-- القسم الأول: حساب تاريخ جديد -->
+      <h3>📅 احسب تاريخ جديد</h3>
+      <label>تاريخ البداية:</label>
+      <input type="date" id="startDate">
 
-    <label>العدد:</label>
-    <input type="number" id="amount" placeholder="مثال: 10">
+      <label>العدد:</label>
+      <input type="number" id="amount" placeholder="مثال: 10">
 
-    <label>الوحدة:</label>
-    <select id="unit">
-      <option value="days">يوم</option>
-      <option value="weeks">أسبوع</option>
-      <option value="months">شهر</option>
-      <option value="years">سنة</option>
-    </select>
+      <label>الوحدة:</label>
+      <select id="unit">
+        <option value="days">يوم</option>
+        <option value="weeks">أسبوع</option>
+        <option value="months">شهر</option>
+        <option value="years">سنة</option>
+      </select>
 
-    <button onclick="calculateDate()">احسب التاريخ</button>
-    <div id="result1" class="result"></div>
+      <button onclick="calculateDate()">احسب التاريخ</button>
+      <div id="result1" class="result"></div>
 
-    <hr>
+      <hr>
 
-    <!-- القسم الثاني: حساب الفرق -->
-    <h3>⏳ احسب الفرق بين تاريخين</h3>
-    <label>التاريخ الأول:</label>
-    <input type="date" id="date1">
+      <!-- القسم الثاني: حساب الفرق -->
+      <h3>⏳ احسب الفرق بين تاريخين</h3>
+      <label>التاريخ الأول:</label>
+      <input type="date" id="date1">
 
-    <label>التاريخ الثاني:</label>
-    <input type="date" id="date2">
+      <label>التاريخ الثاني:</label>
+      <input type="date" id="date2">
 
-    <button onclick="calculateDiff()">احسب الفرق</button>
-    <div id="result2" class="result"></div>
+      <button onclick="calculateDiff()">احسب الفرق</button>
+      <div id="result2" class="result"></div>
+    </div>
   </div>
 
   <!-- التوقيع -->
   <div class="signature">
-    ✍️ أحمد السناني
+    أحمد السناني
   </div>
 
   <script>
